@@ -1,7 +1,7 @@
-import 'package:test_bus2/data/datasources/user_local_data_source.dart';
-import 'package:test_bus2/data/datasources/user_remote_data_source.dart';
-import 'package:test_bus2/data/models/user.dart';
-import 'package:test_bus2/data/repositories/user_repository.dart';
+import 'package:test_bus2/infra/datasources/user_local_data_source.dart';
+import 'package:test_bus2/infra/datasources/user_remote_data_source.dart';
+import 'package:test_bus2/infra/models/user.dart';
+import 'package:test_bus2/domain/repositories/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource remoteDataSource;
@@ -26,6 +26,7 @@ class UserRepositoryImpl implements UserRepository {
       await localDataSource.saveUser(user);
       return user;
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

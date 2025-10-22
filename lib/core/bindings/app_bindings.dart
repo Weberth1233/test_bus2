@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:test_bus2/data/datasources/user_local_data_source.dart';
-import 'package:test_bus2/data/datasources/user_remote_data_source.dart';
-import 'package:test_bus2/data/repositories/user_repository.dart';
-import 'package:test_bus2/data/repositories/user_repository_impl.dart';
+import 'package:test_bus2/infra/datasources/user_local_data_source.dart';
+import 'package:test_bus2/infra/datasources/user_remote_data_source.dart';
+import 'package:test_bus2/domain/repositories/user_repository.dart';
+import 'package:test_bus2/infra/repositories/user_repository_impl.dart';
+import 'package:test_bus2/presentation/features/user/viewmodel/home_view_model.dart';
 
 class AppBindings extends Bindings {
   @override
@@ -17,5 +18,7 @@ class AppBindings extends Bindings {
         localDataSource: Get.find<UserLocalDataSource>(),
       ),
     );
+
+    Get.lazyPut(() => HomeViewModel());
   }
 }

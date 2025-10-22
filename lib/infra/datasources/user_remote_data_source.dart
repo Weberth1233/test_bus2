@@ -11,7 +11,8 @@ class UserRemoteDataSource {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final userJson = data['results'][0];
-      return User.fromJson(userJson);
+      final user = User.fromJson(userJson);
+      return user;
     } else {
       throw Exception('Ocorreu alguma falha na API');
     }

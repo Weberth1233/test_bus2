@@ -3,11 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 part 'user.g.dart';
 
-// NOTA: O JSON da API retorna uma lista "results".
-// A classe "User" abaixo representa o *objeto* DENTRO dessa lista.
-// O seu RemoteDataSource será responsável por pegar o `json['results'][0]`
-// e passar para o `User.fromJson()`.
-
 @HiveType(typeId: 0) // O tipo principal
 class User extends HiveObject {
   @HiveField(0)

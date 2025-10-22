@@ -1,4 +1,4 @@
-import 'package:test_bus2/data/models/user.dart';
+import 'package:test_bus2/infra/models/user.dart';
 
 abstract class UserRepository {
   Future<User> fetchAndSaveNewUser();
