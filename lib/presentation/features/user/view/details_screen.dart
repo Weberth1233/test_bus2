@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../infra/models/user.dart';
+import '../viewmodel/persisted_view_model.dart';
 
 class DetailsScreen extends StatelessWidget {
   final User user;
-  const DetailsScreen({super.key, required this.user});
+  final PersistedViewModel controller = Get.find();
+
+  DetailsScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,20 @@ class DetailsScreen extends StatelessWidget {
             Divider(),
             Text(user.login.username),
             Text(user.login.password),
+            controller.isUserPersisted(user.uuid)
+                ? ElevatedButton(
+                    onPressed: () {
+                      controller.deleteUser(user.uuid);
+                    },
+                    child: Text('Remover'),
+                  )
+                : ElevatedButton(
+                    onPressed: () {
+                      controller.saveUser(user);
+                    },
+                    child: Text('Salvar'),
+                  ),
+            // ElevatedButton(onPressed: () {}, child: Text('Remover')),
           ],
         ),
       ),

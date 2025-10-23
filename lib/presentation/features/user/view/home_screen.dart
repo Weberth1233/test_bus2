@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test_bus2/presentation/features/user/view/persisted_screen.dart';
 import 'package:test_bus2/presentation/features/user/viewmodel/home_view_model.dart';
+import 'package:test_bus2/presentation/features/user/viewmodel/persisted_view_model.dart';
 
 import 'details_screen.dart';
 
@@ -64,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen>
         actions: [
           IconButton(
             icon: const Icon(Icons.data_usage_rounded),
-            onPressed: () {},
+            onPressed: () {
+              Get.find<PersistedViewModel>().loadUsers();
+              Get.to(() => PersistedScreen());
+            },
           ),
         ],
       ),

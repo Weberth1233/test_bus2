@@ -6,8 +6,8 @@ import '../../../../infra/models/user.dart';
 class HomeViewModel extends GetxController {
   final UserRepository _userRepository = Get.find();
 
-  var userList = <User>[].obs;
-  var isLoading = false.obs;
+  RxList<User> userList = <User>[].obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
