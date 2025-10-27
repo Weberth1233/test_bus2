@@ -9,6 +9,8 @@ import 'package:test_bus2/presentation/features/user/viewmodel/persisted_view_mo
 class AppBindings extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(() => HomeViewModel());
+    Get.lazyPut(() => PersistedViewModel());
     // TODO: implement dependencies
     Get.lazyPut(() => UserRemoteDataSource());
     Get.lazyPut(() => UserLocalDataSource());
@@ -19,8 +21,5 @@ class AppBindings extends Bindings {
         localDataSource: Get.find<UserLocalDataSource>(),
       ),
     );
-
-    Get.lazyPut(() => HomeViewModel());
-    Get.lazyPut(() => PersistedViewModel());
   }
 }

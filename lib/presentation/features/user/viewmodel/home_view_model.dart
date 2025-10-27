@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:test_bus2/domain/repositories/user_repository.dart';
 
+import '../../../../domain/core/failures/failures.dart';
 import '../../../../infra/models/user.dart';
 
 class HomeViewModel extends GetxController {
@@ -21,14 +22,40 @@ class HomeViewModel extends GetxController {
       isLoading.value = true;
     }
     try {
-      final newUser = await _userRepository.fetchAndSaveNewUser();
-      userList.add(newUser);
+      final result = await _userRepository.fetchAndSaveNewUser();
+      result.fold(
+        (failure) {
+          _handleFailure(failure);
+        },
+        (user) {
+          userList.add(user);
+        },
+      );
     } catch (e) {
       Get.snackbar('Erro de rede', "Falha ao buscar novo usuário");
     } finally {
       if (isLoading.value) {
         isLoading.value = false;
       }
+    }
+  }
+
+  void _handleFailure(Failure failure) {
+    if (failure is ServerFailure) {
+      Get.defaultDialog(
+        title: 'Erro no servidor!',
+        middleText: failure.message,
+      );
+    } else if (failure is NotFoundFailure) {
+      Get.defaultDialog(
+        title: 'Erro na requisição!',
+        middleText: failure.message,
+      );
+    } else if (failure is UnknownFailure) {
+      Get.defaultDialog(
+        title: 'Erro desconhecido!',
+        middleText: failure.message,
+      );
     }
   }
 }
